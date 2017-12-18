@@ -1,2 +1,2 @@
 # reactapp
-# This is my first react app 
+# This is Basic React App. Generally this is showing add and remove items.
