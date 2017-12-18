@@ -36,7 +36,7 @@ class myReactApp extends React.Component {
       	return (
       			<div className="PageContainer"> 
       				<header>
-      				  <h1>Ad & Remove Items</h1>
+      				  <h1>Add & Remove Items</h1>
       				</header> 
 
       				<div className="SearchboxWrpper">
