@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Abcd from './app.jsx';
+import MyPage from './app.jsx';
 
 
-ReactDOM.render(<Abcd />, document.getElementById('app'));
+ReactDOM.render(<MyPage />, document.getElementById('app'));
 

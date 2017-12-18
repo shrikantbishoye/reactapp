@@ -1,47 +1,58 @@
 import React from 'react';
-
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class myReactApp extends React.Component {
 
-	constructor() {
-        super();
-        this.state = {
-            data: 
-               [
-	            {
-	               "id":1,
-	               "name":"Foo",
-	               "age":"20"
-	            },
-	            {
-	               "id":2,
-	               "name":"Bar",
-	               "age":"30"
-	            },
-	            {
-	               "id":3,
-	               "name":"Baz",
-	               "age":"40"
-	            }
-            ]
-        }
+    constructor(props) {
+      	super(props);
+		
+      	this.state = {
+         	items: []
+      	}
+      	this.handleAdd = this.handleAdd.bind(this);
+    };
+
+    handleAdd() {
+      	var newItems = this.state.items.concat([prompt('Enter Item Name')]);
+      	this.setState({items: newItems});
+   	}
+
+   	handleRemove(i) {
+      	var newItems = this.state.items.slice();
+      	newItems.splice(i, 1);
+      	this.setState({items: newItems});
+   	}
+
+
+   	render() {
+      	var items = this.state.items.map(function(item, i) {
+         	return (
+            	<li className="ItemLabel" key = {item}>
+               		<span className="RemoveBtn" onClick = {this.handleRemove.bind(this, i)} title="Remove">x</span> {item}  
+            	</li>
+         	);
+      	}.bind(this));
+      
+      	return (
+      			<div className="PageContainer"> 
+      				<header>
+      				  <h1>Ad & Remove Items</h1>
+      				</header> 
+
+      				<div className="SearchboxWrpper">
+      					<button className="AddItemBtn" onClick = {this.handleAdd} >Add Item</button>
+      				</div>
+
+      				<div className="MyContentList">
+      					<ul>
+      					    {items} 
+      					</ul>
+      				</div>
+		        </div>
+      	);
    }
 
-    render() {
-		return (
-		    <div>
-		        <Header/>
-		        <div>
-		        	<ul>
-		        		{this.state.data.map((person, i) => <ListRow key = {i} data = {person} />)}
-		            </ul>
-		        </div>
-		        <Footer/>
-		    </div>
-		);
-    }
 }
-
 
 class Header extends React.Component {
 	render() {
@@ -53,14 +64,25 @@ class Header extends React.Component {
     }
 }
 
+// class Content extends React.Component {
+// 	render() {
+// 		return(
+// 			<div>      
 
-class ListRow extends React.Component {
-    render() {
-        return (
-        	<li><span>{this.props.data.id} </span> <span>{this.props.data.name}</span> <span>{this.props.data.age}</span> </li>
-        );
-    }
-}
+//             	<li>
+				
+//             	<ReactCSSTransitionGroup transitionName = "example" transitionEnterTimeout = {500} transitionLeaveTimeout = {500}>
+//                		{items}
+//             	</ReactCSSTransitionGroup>
+
+//             	</li>
+
+
+
+//          	</div>
+// 		);
+// 	}
+// }
 
 class Footer extends React.Component {
 	render() {
